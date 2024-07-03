@@ -1,0 +1,64 @@
+<p style="color: green"><%= notice %></p>
+
+<section class="body-header">
+  <div class="body-header-container">
+    <h2 class="body-header__title">Сотрудники</h2>
+    <a href="#" class="body-header-user">
+      <span class="body-header-user__fio">Профиль</span>
+      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+    </a>
+  </div>
+</section>
+
+<section class="personal-section">
+  <div class="container personal-container">
+    <div class="personal-header">
+      <h3 class="personal-header__title">Список всех сотрудников</h3>
+      <div class="personal-header__search-box">
+        <a href="#" class="personal-header__search-link"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <input type="text" class="personal-header__search" placeholder="Поиск">
+      </div>
+      <%= link_to "Добавить сотрудника", new_personal_path, class: 'personal-header__button' %>
+    </div>
+    <div id="personals" class="personal-main">
+      <ul class="personal-main-header">
+        <li class="personal-main-header__item">
+          <span class="personal-main-header__span personal-main-header__fio">ФИО</span>
+        </li>
+
+        <li class="personal-main-header__item">
+          <span class="personal-main-header__span">Отдел</span>
+        </li>
+
+        <li class="personal-main-header__item">
+          <span class="personal-main-header__span">День рождения</span>
+        </li>
+
+        <li class="personal-main-header__item">
+          <span class="personal-main-header__span">Пол</span>
+        </li>
+
+        <li class="personal-main-header__item">
+          <span class="personal-main-header__span">Почта</span>
+        </li>
+
+        <li class="personal-main-header__item">
+          <span class="personal-main-header__span">Номер телефона</span>
+        </li>
+
+        <li class="personal-main-header__item">
+        </li>
+      </ul>
+      <% @personals.each do |personal| %>
+        <div class="personals-info-block">
+          <%= render personal %>
+        </div>
+      <% end %>
+    </div>
+    <% if @personals.total_pages > 1 %>
+      <div class="pagination">
+        <%= paginate @personals %>
+      </div>
+    <% end %>
+  </div>
+</section>

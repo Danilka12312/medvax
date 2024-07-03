@@ -1,0 +1,23 @@
+<ul id="<%= dom_id personal %>" class="personals-info">
+  <li class="personal-info__item personal-info__fio">
+    <p class="personal-info__p"><%= personal.fio %></p>
+  </li>
+  <li class="personal-info__item">
+    <p class="personal-info__p"><%= personal.departament %></p>
+  </li>
+  <li class="personal-info__item">
+    <p class="personal-info__p"><%= personal.date_of_birthday %></p>
+  </li>
+  <li class="personal-info__item">
+    <p class="personal-info__p"><%= personal.gender %></p>
+  </li>
+  <li class="personal-info__item">
+    <p class="personal-info__p"><%= personal.email %></p>
+  </li>
+  <li class="personal-info__item">
+    <p class="personal-info__p"><%= personal.phone_number %></p>
+  </li>
+  <li class="personal-info__item">
+    <p class="personal-info__p"><%= link_to "Подробнее", personal, class: 'personal-button' %></p>
+  </li>
+</ul>

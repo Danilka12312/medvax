@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MedVax</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/c29ac3ee6b.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <a href="<%= root_path %>" class="logo">Med<span class="logo__span">Vax</span> </a>
+        <ul class="menu">
+          <li class="menu__item <%= 'menu__item_active' if request.fullpath == root_path %>">
+            <a href="<%= root_path %>" class="menu__link"><i class="fa-solid fa-house menu-fa"></i> Главная</a>
+          </li>
+
+          <li class="menu__item">
+            <a href="#" class="menu__link"><i class="fa-regular fa-calendar menu-fa"></i> Календарь</a>
+          </li>
+
+          <li class="menu__item">
+            <a href="#" class="menu__link"><i class="fa-solid fa-syringe menu-fa"></i> Вакцины</a>
+          </li>
+
+          <li class="menu__item <%= 'menu__item_active' if request.fullpath.include?(personals_path) %>">
+            <a href="<%= personals_path %>" class="menu__link"><i class="fa-solid fa-people-roof menu-fa"></i> Сотрудники</a>
+          </li>
+
+          <li class="menu__item">
+            <a href="#" class="menu__link"><i class="fa-solid fa-file-export menu-fa"></i> Отчёты</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main class="main">
+      <%= yield %>
+    </main>
+  </body>
+</html>
