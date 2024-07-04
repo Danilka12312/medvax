@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_03_025239) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_03_211951) do
   create_table "personals", force: :cascade do |t|
     t.string "fio"
     t.string "date_of_birthday"
@@ -22,4 +22,28 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_03_025239) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "vaccinations", force: :cascade do |t|
+    t.integer "personal_id", null: false
+    t.integer "vaccine_id", null: false
+    t.date "vaccination_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["personal_id"], name: "index_vaccinations_on_personal_id"
+    t.index ["vaccine_id"], name: "index_vaccinations_on_vaccine_id"
+  end
+
+  create_table "vaccines", force: :cascade do |t|
+    t.string "name"
+    t.string "manufacturer"
+    t.text "storage_conditions"
+    t.text "description"
+    t.integer "expiry_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "mandatory"
+    t.string "vaccine_type"
+  end
+
+  add_foreign_key "vaccinations", "personals"
+  add_foreign_key "vaccinations", "vaccines"
 end

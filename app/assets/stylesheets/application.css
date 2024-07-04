@@ -153,6 +153,7 @@ footer{
 .nearest-vaccines {}
 .home-info-block {
 	width: 49%;
+	height: 100%;
 
 	background: #fff;
 	border-radius: 7px;
@@ -200,13 +201,21 @@ footer{
 	border-bottom: 1px solid rgba(0,0,0,0.1);
 	border-top: 1px solid rgba(0,0,0,0.1);
 
-	padding: 10px 20px;
+	text-align: center;
+
+	padding: 15px 20px;
 }
 .home-info-block__span {
 	font-size: 15px;
 	font-weight: 600;
 	color: #8D98A2;
 }
+.home-info-block__main-header-event .home-info-block__span{
+	width: 9%;
+
+	text-align: center;
+}
+
 .home-info-block__main-list {
 }
 .home-info-block__main-list__item {
@@ -219,7 +228,7 @@ footer{
 	border-bottom: 1px solid rgba(0,0,0,0.1);
 	border-top: 1px solid rgba(0,0,0,0.1);
 
-	padding: 15px 20px;
+	padding: 20px 20px;
 }
 .home-info-block__main-list__item:nth-child(odd){
 	border-top: 0;
@@ -236,6 +245,88 @@ footer{
 .home-info-block__main-list__link-person, .home-info-block__main-list__link-vacicine {
 	text-decoration: none;
 }
+
+.home-info-block__person, .home-info-block__vacicine, .home-info-block__main-list__span {
+	width: 24%;
+
+	text-decoration: none;
+
+	padding: 0px 5px;
+}
+
+.home-info-block__person-button{
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 5px;
+
+	color: #000;
+	text-align: center;
+	text-decoration: none;
+
+	padding: 5px 15px;
+}
+
+.home-info-block__main-header-event{
+	padding: 15px 25px;
+}
+
+.nearest-event{
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+.form-control, .month-selection-form{
+	display: inline-block;
+}
+
+/* app/assets/stylesheets/application.css */
+
+.month-select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  -webkit-appearance: none;  /* Remove default arrow for Chrome */
+  -moz-appearance: none;     /* Remove default arrow for Firefox */
+  appearance: none;          /* Remove default arrow for others */
+}
+
+.month-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.month-selection-form {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* Add custom arrow for select */
+.month-select::after {
+  content: "▼";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Ensure select is positioned correctly */
+.month-select-container {
+  position: relative;
+  display: inline-block;
+}
+
+
+
+
+
+
+
+
 
 
 

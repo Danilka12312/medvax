@@ -5,4 +5,7 @@ class Personal < ApplicationRecord
   	validates :email, presence: true, uniqueness: true
   	validates :phone_number, presence: true
   	validates :departament, presence: true
+
+  	has_many :vaccinations
+  	has_many :vaccines, through: :vaccinations
 end

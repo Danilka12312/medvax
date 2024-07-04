@@ -1,0 +1,23 @@
+<!-- app/views/vaccinations/index.html.erb -->
+<h1>Список всех вакцинаций</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Сотрудник</th>
+      <th>Вакцина</th>
+      <th>Дата вакцинации</th>
+      <th>Дата окончания действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vaccinations.each do |vaccination| %>
+      <tr>
+        <td><%= link_to vaccination.personal.fio, personal_path(vaccination.personal) %></td>
+        <td><%= link_to vaccination.vaccine.name, vaccine_path(vaccination.vaccine) %></td>
+        <td><%= vaccination.vaccination_date %></td>
+        <td><%= vaccination.expiry_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

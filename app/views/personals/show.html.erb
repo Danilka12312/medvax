@@ -8,3 +8,30 @@
 
   <%= button_to "Destroy this personal", @personal, method: :delete %>
 </div>
+
+
+<h3>Вакцинации</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Вакцина</th>
+      <th>Дата вакцинации</th>
+      <th>Дата окончания срока действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @personal.vaccinations.each do |vaccination| %>
+      <tr>
+        <td><%= vaccination.vaccine.name %></td>
+        <td><%= vaccination.vaccination_date %></td>
+        <td><%= vaccination.expiry_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Добавить вакцинацию</h3>
+<%= render 'vaccinations/form', vaccination: @personal.vaccinations.build %>
+
+<%= link_to 'Редактировать', edit_personal_path(@personal) %> |
+<%= link_to 'Назад', personals_path %>

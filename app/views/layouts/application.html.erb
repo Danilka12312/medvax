@@ -29,8 +29,8 @@
             <a href="#" class="menu__link"><i class="fa-regular fa-calendar menu-fa"></i> Календарь</a>
           </li>
 
-          <li class="menu__item">
-            <a href="#" class="menu__link"><i class="fa-solid fa-syringe menu-fa"></i> Вакцины</a>
+          <li class="menu__item <%= 'menu__item_active' if request.fullpath.include?(vaccines_path) %>">
+            <a href="<%= vaccines_path %>" class="menu__link"><i class="fa-solid fa-syringe menu-fa"></i> Медицинские препараты</a>
           </li>
 
           <li class="menu__item <%= 'menu__item_active' if request.fullpath.include?(personals_path) %>">
@@ -43,6 +43,7 @@
         </ul>
       </div>
     </header>
+
     <main class="main">
       <%= yield %>
     </main>

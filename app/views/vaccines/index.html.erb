@@ -1,0 +1,22 @@
+<section class="body-header">
+  <div class="body-header-container">
+    <h2 class="body-header__title">Медицинские препараты</h2>
+    <a href="#" class="body-header-user">
+      <span class="body-header-user__fio">Профиль</span>
+      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+    </a>
+  </div>
+</section>
+
+<p style="color: green"><%= notice %></p>
+
+<div id="vaccines">
+  <% @vaccines.each do |vaccine| %>
+    <%= render vaccine %>
+    <p>
+      <%= link_to "Show this vaccine", vaccine %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New vaccine", new_vaccine_path %>

@@ -1,0 +1,27 @@
+<!-- app/views/vaccinations/_form.html.erb -->
+<%= form_with(model: [vaccination.personal, vaccination]) do |form| %>
+  <% if vaccination.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(vaccination.errors.count, "ошибка") %> не позволили сохранить вакцинацию:</h2>
+      <ul>
+        <% vaccination.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :vaccine_id, "Вакцина" %>
+    <%= form.collection_select :vaccine_id, Vaccine.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.label :vaccination_date, "Дата вакцинации" %>
+    <%= form.date_field :vaccination_date %>
+  </div>
+
+  <div>
+    <%= form.submit "Добавить вакцинацию" %>
+  </div>
+<% end %>
