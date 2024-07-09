@@ -1,0 +1,17 @@
+<!-- app/views/vaccines/_vaccines_list.html.erb -->
+<% vaccines.each do |vaccine| %>
+  <div class="vaccine-block-card">
+    <ul id="vaccine_<%= vaccine.id %>" class="vaccine-info personals-info">
+      <li class="vaccine-info__item personal-info__item"><%= vaccine.name %></li>
+      <li class="vaccine-info__item personal-info__item"><%= vaccine.manufacturer %></li>
+      <li class="vaccine-info__item personal-info__item"><%= vaccine.storage_conditions %></li>
+      <li class="vaccine-info__item personal-info__item"><%= vaccine.description %></li>
+      <li class="vaccine-info__item personal-info__item"><%= vaccine.expiry_date %></li>
+      <li class="vaccine-info__item personal-info__item">
+        <p class="personal-info__p">
+          <a class="personal-button" href="<%= vaccine_path(vaccine) %>" previewlistener="true">Подробнее</a>
+        </p>
+      </li>
+    </ul>
+  </div>
+<% end %>

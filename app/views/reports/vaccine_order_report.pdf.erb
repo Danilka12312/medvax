@@ -1,0 +1,23 @@
+<h1>Vaccine Order Report</h1>
+
+<p>Отчёт на <%= @current_month.strftime("%B %Y") %>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Вакцина</th>
+      <th>Производитель</th>
+      <th>Количество</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vaccine_counts.each do |vaccine_name, count| %>
+      <% vaccine = Vaccine.find_by(name: vaccine_name) %>
+      <tr>
+        <td><%= vaccine_name %></td>
+        <td><%= vaccine.manufacturer %></td>
+        <td><%= count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

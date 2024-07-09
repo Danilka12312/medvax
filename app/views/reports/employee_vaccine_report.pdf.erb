@@ -1,0 +1,26 @@
+<h1>Employee Vaccine Report</h1>
+
+<p>Отчёт на <%= @current_month.strftime("%B %Y") %>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Сотрудник</th>
+      <th>Вакцина</th>
+      <th>Дата</th>
+      <th>Время</th>
+      <th>Кабинет</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @schedules.each do |schedule| %>
+      <tr>
+        <td><%= schedule.personal.fio %></td>
+        <td><%= schedule.vaccine.name %></td>
+        <td><%= schedule.vaccination_date %></td>
+        <td><%= schedule.vaccination_time.strftime("%H:%M") %></td>
+        <td><%= schedule.room.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

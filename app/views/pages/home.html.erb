@@ -11,93 +11,93 @@
 <section class="home-info">
 	<div class="container home-info-container">
 		<div class="nearest-event home-info-block">
-			<div class="home-info-block__header">
-				<div class="home-info-block__header-text">
-					<h3 class="home-info-block__title">Мероприятия на сегодня</h3>
-					<p class="home-info-block__subtitle">На сегодня запланировано 23 мероприятия</p>
-				</div>
-				<a href="#" class="home-info-block__header-button">Весь список</a>
-			</div>
-			<div class="home-info-block__main">
-				<div class="home-info-block__main-header home-info-block__main-header-event">
-					<span class="home-info-block__span">Сотрудник</span>
-					<span class="home-info-block__span">Тип записи</span>
-					<span class="home-info-block__span">Время записи</span>
-					<span class="home-info-block__span"></span>
-				</div>
-				<ul class="home-info-block__main-list">
-					<li class="home-info-block__main-list__item">
-						<a href="#" class="home-info-block__person">Кадров Никита</a>
-						<a href="#" class="home-info-block__vacicine">Вакцинация</a>
-						<span class="home-info-block__main-list__span">
-							8:00 - 8:30
-						</span>
-						<a href="#" class="home-info-block__person-button">Отметить</a>
-					</li>
-
-					<li class="home-info-block__main-list__item">
-						<a href="#" class="home-info-block__person">Кадров Никита</a>
-						<a href="#" class="home-info-block__vacicine">Вакцинация</a>
-						<span class="home-info-block__main-list__span">
-							8:00 - 8:30
-						</span>
-						<a href="#" class="home-info-block__person-button">Отметить</a>
-					</li>
-
-					<li class="home-info-block__main-list__item">
-						<a href="#" class="home-info-block__person">Кадров Никита</a>
-						<a href="#" class="home-info-block__vacicine">Вакцинация</a>
-						<span class="home-info-block__main-list__span">
-							8:00 - 8:30
-						</span>
-						<a href="#" class="home-info-block__person-button">Отметить</a>
-					</li>
-
-					<li class="home-info-block__main-list__item">
-						<a href="#" class="home-info-block__person">Кадров Никита</a>
-						<a href="#" class="home-info-block__vacicine">Вакцинация</a>
-						<span class="home-info-block__main-list__span">
-							8:00 - 8:30
-						</span>
-						<a href="#" class="home-info-block__person-button">Отметить</a>
-					</li>
-
-					<li class="home-info-block__main-list__item">
-						<a href="#" class="home-info-block__person">Кадров Никита</a>
-						<a href="#" class="home-info-block__vacicine">Вакцинация</a>
-						<span class="home-info-block__main-list__span">
-							8:00 - 8:30
-						</span>
-						<a href="#" class="home-info-block__person-button">Отметить</a>
-					</li>
-				</ul>
-			</div>
+		    <div class="home-info-block__main">
+		        <div class="home-info-block__header">
+		            <span class="home-info-block__title">Записи на сегодня</span>
+		             <%= link_to "Добавить запись", new_vaccination_schedule_path, class: 'personal-header__button' %>
+		        </div>
+		        <div class="home-info-block__main-header">
+		            <span class="home-info-block__span block__span">Сотрудник</span>
+		            <span class="home-info-block__span block__span">Вакцина</span>
+		            <span class="home-info-block__span block__span">
+		            	<select id="room-filter" class="room-filter">
+			                <option value="">Кабинет</option>
+			                <% Room.all.each do |room| %>
+			                    <option value="<%= room.id %>"><%= room.name %></option>
+			                <% end %>
+			            </select>
+		            </span>
+		            <span class="home-info-block__span block__span">Время</span>
+		        </div>
+		        <ul class="home-info-block__main-list" id="schedule-list">
+		            <% today_schedules = VaccinationSchedule.where(vaccination_date: Date.today) %>
+		            <% if today_schedules.any? %>
+			            <% today_schedules.each do |schedule| %>
+			                <li class="home-info-block__main-list__item">
+			                    <span class="home-info-block__main-list__span list_span"><%= link_to schedule.personal.fio, personal_path(schedule.personal) %></span>
+			                    <span class="home-info-block__main-list__span list_span"><%= link_to schedule.vaccine.name, vaccine_path(schedule.vaccine) %></span>
+			                    <span class="home-info-block__main-list__span list_span"><%= schedule.room.name %></span>
+			                    <span class="home-info-block__main-list__span list_span"><%= schedule.vaccination_time.strftime("%H:%M") %></span>
+			                </li>
+			            <% end %>
+			           <% else %>
+			           	<li class="home-info-block__main-list__item no-shedule-today">
+				             На сегодня нет записей     
+			            </li>
+			           <% end %>
+		        </ul>
+		    </div>
 		</div>
+
 
 		<!-- app/views/pages/home.html.erb -->
 		<div class="nearest-vaccines home-info-block">
 		  <div class="home-info-block__header">
 		    <div class="home-info-block__header-text">
-		      <div class="home-info-block__title">Вакцинация в 
-		        <%= form_with url: root_path, method: :get, local: true, class: "month-selection-form" do %>
-		          <div class="month-select-container">
-		            <%= select_tag :month, options_for_select(next_three_months, @current_month.strftime("%Y-%m")), class: "form-control month-select", id: "month-select" %>
-		          </div>
-		        <% end %>
-		      </div>
-		      <p class="home-info-block__subtitle">Необходима вакцинация для <%= @expiring_vaccinations.count %> сотрудников</p>
+		      <div class="home-info-block__title">Вакцинация <%= @current_month.strftime("%m-%Y") %></div>
+		      <p class="home-info-block__subtitle">
+		        Необходима вакцинация для <%= (@expiring_vaccinations.map(&:personal) + @missing_mandatory_vaccinations).uniq.count %> сотрудников
+		      </p>
 		    </div>
+		    <%= link_to 'Назначить записи автоматически', generate_auto_schedules_path, method: :post, class: 'home-info-block__header-button' %>
 		  </div>
+
 		  <div class="home-info-block__main">
 		    <div class="home-info-block__main-header">
 		      <span class="home-info-block__span">Сотрудник</span>
 		      <span class="home-info-block__span">Вакцина</span>
 		    </div>
 		    <ul class="home-info-block__main-list">
-		      <% @expiring_vaccinations.each do |vaccination| %>
+		      <% displayed_vaccines = {} %>
+
+		      <% (@expiring_vaccinations.map(&:personal) + @missing_mandatory_vaccinations).uniq.each do |personal| %>
 		        <li class="home-info-block__main-list__item">
-		          <%= link_to vaccination.personal.fio, personal_path(vaccination.personal), class: 'home-info-block__main-list__link-person' %>
-		          <%= link_to vaccination.vaccine.name, vaccine_path(vaccination.vaccine), class: 'home-info-block__main-list__link-vaccine' %>
+		          <%= link_to personal.fio, personal_path(personal), class: 'home-info-block__main-list__link-person' %>
+		          <ul>
+		            <% Vaccine.where(mandatory: true).each do |vaccine| %>
+		              <% vaccination = personal.vaccinations.find_by(vaccine: vaccine) %>
+		              <% if vaccination.nil? || (vaccination.vaccination_date + vaccine.expiry_date.days).to_date.between?(@current_month.beginning_of_month, @current_month.end_of_month) %>
+		                <% unless displayed_vaccines[personal.id]&.include?(vaccine.id) %>
+		                  <% if vaccine.name.present? %>
+		                    <li style="width: 150%;">
+		                      <%= link_to vaccine.name, vaccine_path(vaccine), class: 'home-info-block__main-list__link-vaccine' %>
+		                      <% if VaccinationSchedule.exists?(personal: personal, vaccine: vaccine) %>
+		                        <span class="status"><i class="fa-solid fa-check status-fa"></i></span>
+		                      <% else %>
+		                        <span class="status"><i class="fa-solid fa-xmark status-fa status-fa_red"></i></span>
+		                      <% end %>
+		                    </li>
+		                    <% displayed_vaccines[personal.id] ||= [] %>
+		                    <% displayed_vaccines[personal.id] << vaccine.id %>
+		                  <% else %>
+		                    <li>
+		                      <span class="error">Название вакцины отсутствует</span>
+		                    </li>
+		                  <% end %>
+		                <% end %>
+		              <% end %>
+		            <% end %>
+		          </ul>
 		        </li>
 		      <% end %>
 		    </ul>
@@ -105,8 +105,31 @@
 		</div>
 
 
-
-		<%= javascript_include_tag "auto_update" %>
-
 	</div>
+
+	<%= javascript_include_tag "auto_update" %>
+
+</div>
 </section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+	    const roomFilter = document.getElementById('room-filter');
+	    
+	    roomFilter.addEventListener('change', function() {
+	        const roomId = this.value;
+	        const url = `/filter_schedules?room_id=${roomId}`;
+
+	        fetch(url, {
+	            headers: {
+	                'X-Requested-With': 'XMLHttpRequest'
+	            }
+	        })
+	        .then(response => response.text())
+	        .then(data => {
+	            document.getElementById('schedule-list').innerHTML = data;
+	        });
+	    });
+	});
+
+</script>

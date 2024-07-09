@@ -1,0 +1,15 @@
+<h1>Создание расписания вакцинаций</h1>
+
+<%= form_with url: create_schedule_for_period_vaccination_schedules_path, method: :post, local: true do |f| %>
+  <div class="field">
+    <%= label_tag 'start_date', "Начальная дата" %>
+    <%= date_field 'start_date', value: @start_date, readonly: true, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= label_tag 'end_date', "Конечная дата" %>
+    <%= date_field 'end_date', value: @end_date, readonly: true, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Создать расписание", class: "btn btn-primary" %>
+  </div>
+<% end %>

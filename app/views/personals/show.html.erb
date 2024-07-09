@@ -1,37 +1,93 @@
-<p style="color: green"><%= notice %></p>
+<section class="body-header">
+  <div class="body-header-container">
+    <h2 class="body-header__title">Сотрудники</h2>
+    <a href="#" class="body-header-user">
+      <span class="body-header-user__fio">Профиль</span>
+      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+    </a>
+  </div>
+</section>
 
-<%= render @personal %>
+<div class="container personal-show">
+  <div class="personal-header">
+    <h3 class="personal-header__title personal-show__head"><i class="fa-solid fa-chevron-left back-fa"></i> <%= link_to "Назад", "javascript:history.back()", class: 'personal-show__link' %>
+    <h3 class="personal-show__fio personal-header__title"><%= @personal.fio %></h3>
+    <%= link_to "Записать на приём", new_personal_path, class: 'personal-header__button' %>
+  </div>
 
-<div>
-  <%= link_to "Edit this personal", edit_personal_path(@personal) %> |
-  <%= link_to "Back to personals", personals_path %>
+  <ul class="personal-main-header">
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">Отдел</span>
+    </li>
 
-  <%= button_to "Destroy this personal", @personal, method: :delete %>
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">День рождения</span>
+    </li>
+
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">Пол</span>
+    </li>
+
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">Почта</span>
+    </li>
+
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">Номер телефона</span>
+    </li>
+
+    <li class="personal-main-header__item">
+    </li>
+  </ul>
+  <%= render @personal %>
+</div>
+
+<div class="container person-info-container">
+  <!-- app/views/vaccinations/index.html.erb -->
+<div class="person-vaccine-container">
+  <div class="person-vaccine-header block-header">
+    <h3 class="person-vaccine__title block-header__title">История вакцинации</h3>
+  </div>
+
+  <div class="vaccine-block">
+    <ul class="vaccine-block__menu">
+      <li class="vaccine-block__item">
+        <span class="vaccine-block__span">Вакцина</span>
+      </li>
+      <li class="vaccine-block__item">
+        <span class="vaccine-block__span">Дата вакцинации</span>
+      </li>
+      <li class="vaccine-block__item">
+        <span class="vaccine-block__span">Дата окончания срока действия</span>
+      </li>
+    </ul>
+    <ul class="vaccine-list">
+      <% @vaccinations.each do |vaccination| %>
+        <li class="vaccine-list__item">
+          <%= vaccination.vaccine.name %>
+        </li>
+        <li class="vaccine-list__item">
+          <%= vaccination.vaccination_date %>
+        </li>
+        <li class="vaccine-list__item">
+          <%= vaccination.expiry_date %>   
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="pagination">
+    <%= paginate @vaccinations %>
+  </div>
 </div>
 
 
-<h3>Вакцинации</h3>
-<table>
-  <thead>
-    <tr>
-      <th>Вакцина</th>
-      <th>Дата вакцинации</th>
-      <th>Дата окончания срока действия</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @personal.vaccinations.each do |vaccination| %>
-      <tr>
-        <td><%= vaccination.vaccine.name %></td>
-        <td><%= vaccination.vaccination_date %></td>
-        <td><%= vaccination.expiry_date %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<h3>Добавить вакцинацию</h3>
-<%= render 'vaccinations/form', vaccination: @personal.vaccinations.build %>
-
-<%= link_to 'Редактировать', edit_personal_path(@personal) %> |
-<%= link_to 'Назад', personals_path %>
+  <div class="person-add-vaccine">
+    <div class="block-header">
+      <h3 class="person-add__title person-vaccine__title">Добавить вакцинацию</h3>
+    </div>
+    <div class="person-add__main">
+      <%= render 'vaccinations/form', vaccination: @personal.vaccinations.build %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<section class="body-header">
+  <div class="body-header-container">
+    <h2 class="body-header__title"><%= @date.strftime('%d %B %Y') %></h2>
+    <a href="#" class="body-header-user">
+      <span class="body-header-user__fio">Профиль</span>
+      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+    </a>
+  </div>
+</section>
+
+<section class="calendar-day-section">
+  <div class="container calendar-container">
+    <div class="personal-header calendar-header block-header">
+      <h3 class="personal-header__title personal-show__head"><i class="fa-solid fa-chevron-left back-fa"></i> <%= link_to "Назад", "javascript:history.back()", class: 'personal-show__link' %>
+      <h3 class="personal-header__title">Все записи на <%= @date.strftime('%d %B %Y') %></h3>
+      <span>  </span>
+    </div>
+    <div class="calendar calendar-days">
+      <% if @schedules.any? %>
+        <% rooms = @schedules.map(&:room).uniq %>
+        <% rooms.each do |room| %>
+          <div class="calendar-room">
+            <h4><%= room.name %></h4>
+            <table class="calendar-table">
+              <thead>
+                <tr>
+                  <th>Время</th>
+                  <th>Сотрудники</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% time_slots = @schedules.where(room: room).order(:vaccination_time).group_by { |s| s.vaccination_time.strftime('%H:%M') } %>
+                <% time_slots.each do |time, schedules| %>
+                  <tr>
+                    <td><%= time %></td>
+                    <td>
+                      <% schedules.each do |schedule| %>
+                        <div><%= schedule.personal.fio %></div>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="no-schedules-message">
+          <span>На этот день нет записей</span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

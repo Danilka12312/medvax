@@ -1,10 +1,59 @@
-<p style="color: green"><%= notice %></p>
+<!-- app/views/vaccines/show.html.erb -->
+<section class="body-header">
+  <div class="body-header-container">
+    <h2 class="body-header__title">Вакцины</h2>
+    <a href="#" class="body-header-user">
+      <span class="body-header-user__fio">Профиль</span>
+      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+    </a>
+  </div>
+</section>
 
-<%= render @vaccine %>
+<div class="container personal-show">
+  <div class="personal-header">
+    <h3 class="personal-header__title personal-show__head"><i class="fa-solid fa-chevron-left back-fa"></i> <%= link_to "Назад", "javascript:history.back()", class: 'personal-show__link' %>
+    <h3 class="personal-show__fio personal-header__title"><%= @vaccine.name %></h3>
+    <%= link_to "Редактировать вакцину", edit_vaccine_path(@vaccine), class: 'personal-header__button' %>
+  </div>
 
-<div>
-  <%= link_to "Edit this vaccine", edit_vaccine_path(@vaccine) %> |
-  <%= link_to "Back to vaccines", vaccines_path %>
+  <ul class="personal-main-header">
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">Производитель</span>
+    </li>
 
-  <%= button_to "Destroy this vaccine", @vaccine, method: :delete %>
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">Условия хранения</span>
+    </li>
+
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">Описание</span>
+    </li>
+
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">Срок годности (в днях)</span>
+    </li>
+
+
+    <li class="personal-main-header__item">
+      <span class="personal-main-header__span">Обязательная вакцина</span>
+    </li>
+  </ul>
+
+  <ul class="personals-info">
+    <li class="personal-info__item personal-info__fio">
+      <p class="personal-info__p"><%= @vaccine.manufacturer %></p>
+    </li>
+    <li class="personal-info__item">
+      <p class="personal-info__p"><%= p@vaccine.storage_conditions %></p>
+    </li>
+    <li class="personal-info__item">
+      <p class="personal-info__p"><%= @vaccine.description %></p>
+    </li>
+    <li class="personal-info__item">
+      <p class="personal-info__p peronsla-info__gender"><%= @vaccine.expiry_date %></p>
+    </li>
+    <li class="personal-info__item">
+      <p class="personal-info__p"><%= @vaccine.mandatory ? 'Да' : 'Нет' %></p>
+    </li>
+  </ul>
 </div>

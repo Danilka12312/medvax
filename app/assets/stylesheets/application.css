@@ -24,7 +24,7 @@ header{
 }
 
 main{
-
+	overflow-x: auto;
 }
 
 footer{
@@ -281,53 +281,74 @@ footer{
 /* app/assets/stylesheets/application.css */
 
 .month-select {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #333;
-  background-color: #fff;
-  -webkit-appearance: none;  /* Remove default arrow for Chrome */
-  -moz-appearance: none;     /* Remove default arrow for Firefox */
-  appearance: none;          /* Remove default arrow for others */
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+	color: #333;
+	background-color: #fff;
+	-webkit-appearance: none;  /* Remove default arrow for Chrome */
+	-moz-appearance: none;     /* Remove default arrow for Firefox */
+	appearance: none;          /* Remove default arrow for others */
 }
 
 .month-select:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .month-selection-form {
-  display: inline-block;
-  margin-left: 10px;
-  vertical-align: middle;
+	display: inline-block;
+	margin-left: 10px;
+	vertical-align: middle;
 }
 
 /* Add custom arrow for select */
 .month-select::after {
-  content: "▼";
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
+	content: "▼";
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
 }
 
 /* Ensure select is positioned correctly */
 .month-select-container {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 
 
+.room-filter {
+    -webkit-appearance: none; /* Скрыть стандартный стиль в Safari и Chrome */
+    -moz-appearance: none; /* Скрыть стандартный стиль в Firefox */
+    appearance: none; /* Скрыть стандартный стиль в современных браузерах */
+    background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="%23000" stroke-width="2" d="M2 6l6 6 6-6"/></svg>') no-repeat right 10px center;
+    background-size: 12px;
+    padding: 10px 10px;
+    padding-right: 25px; /* Отступ для иконки */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
 
+}
 
+.room-filter::-ms-expand {
+    display: none; /* Убрать стрелочку в IE */
+}
 
+.list_span{
+	text-align: center;
+}
 
-
-
+.block__span{
+	display: inline-block;
+	width: 24%;
+}
 
 
 .personal-section {
@@ -377,7 +398,7 @@ footer{
 	padding: 15px 30px;
 }
 .personal-main-header__item {
-	width: 14%;
+	width: 15%;
 
 	list-style-type: none;
 	text-align: center;
@@ -446,13 +467,13 @@ footer{
 .fa-magnifying-glass {}
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
 }
 
 .pagination .page {
-  margin: 0 5px; /* чтобы убрать подчёркивание ссылок */
+	margin: 0 5px; /* чтобы убрать подчёркивание ссылок */
 }
 
 .pagination a{
@@ -464,5 +485,741 @@ footer{
 
 .pagination .current {
 	font-weight: 600;
-  	color: #0547C0;
+	color: #0547C0;
+}
+
+/* Медиазапросы для планшетов */
+@media (max-width: 768px) {
+	.personal-header, .personal-main-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.personal-header__title, .personal-main-header__item {
+		text-align: left;
+	}
+
+	.personal-header__search-box, .personal-header__button {
+		margin-top: 10px;
+		width: 100%;
+		text-align: center;
+	}
+
+	.personal-header__search-box {
+		display: flex;
+		justify-content: center;
+	}
+
+	.personal-main-header__item {
+		width: 100%;
+		text-align: left;
+		padding: 10px 0;
+	}
+
+	.personals-info {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 20px;
+	}
+
+	.personal-info__item {
+		width: 100%;
+		text-align: left;
+		padding: 5px 0;
+	}
+
+	.personal-button {
+		width: 100%;
+		text-align: center;
+		margin-top: 10px;
+	}
+}
+
+/* Медиазапросы для мобильных устройств */
+@media (max-width: 480px) {
+	.personal-header__title, .personal-main-header__item {
+		font-size: 16px;
+	}
+
+	.personal-header__button {
+		padding: 8px 10px;
+	}
+
+	.personal-header__search-box {
+		padding: 6px 15px;
+	}
+
+	.personal-header__search {
+		font-size: 14px;
+	}
+
+	.personal-button {
+		padding: 8px 10px;
+		font-size: 14px;
+	}
+
+	.personals-info {
+		padding: 15px 20px;
+	}
+
+	.personal-info__item {
+		padding: 4px 0;
+	}
+}
+
+
+
+
+/*Show Personal*/
+
+.personal-show{
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+
+	margin: 30px auto;
+}
+
+.back-fa{
+	font-size: 14px;
+	margin-right: 10px;
+}
+
+.personal-show__head{
+	display: flex;
+	align-items: center;
+}
+
+.personal-show__link{
+	text-decoration: none;
+	color: #42484E;
+}
+
+.person-info-container{
+	position: relative;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+	flex-wrap: wrap;
+}
+
+.person-vaccine-container{
+	width: 70%;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	margin: 0 0;
+}
+
+.person-vaccine-header {}
+.block-header {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+	padding: 20px 30px;
+}
+.person-vaccine__title {
+	color: #42484E;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.vaccine-block {
+
+}
+.vaccine-block__menu {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	background: #F9FBFC;
+	width: 100%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+	padding: 15px 0;
+}
+.vaccine-block__item {
+	list-style-type: none;
+	width: 32%;
+
+	text-align: center;
+}
+.vaccine-block__span {
+	font-weight: 600;
+	font-size: 15px;
+	color: #42484E;
+}
+.vaccine-list {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.vaccine-list__item {
+	width: 33.3%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+	list-style-type: none;
+
+	text-align: center;
+
+	padding: 10px 0;
+}
+
+/* app/assets/stylesheets/application.css */
+
+.vaccination-form {
+}
+
+.vaccination-form .form-group {
+	margin-bottom: 15px;
+}
+
+.vaccination-form .form-control {
+	width: 100%;
+	padding: 10px;
+	font-size: 14px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+}
+
+.page_num{
+	padding: 20px 0;
+	margin-top: -30px;
+}
+
+.vaccination-form .btn-primary {
+	background-color: #0547C0;
+	color: white;
+	font-weight: 600;
+	font-size: 15px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100%;
+
+	padding: 15px 0;
+}
+
+.vaccination-form .btn-primary:hover {
+	background-color: #0547C0;
+}
+
+.error-messages {
+	color: red;
+	margin-bottom: 15px;
+}
+
+.error-messages h2 {
+	margin-top: 0;
+}
+
+.error-messages ul {
+	padding-left: 20px;
+}
+
+
+.person-add-vaccine{
+	position: sticky;
+	top: 0px;
+
+	width: 28%;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.person-add__main{
+	padding: 15px 30px;
+}
+
+.personal-info__item {
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.personal-info__p {
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+/*Pages Vaccine*/
+.vaccine-container{
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+
+	margin: 30px auto;
+}
+
+/*Page Calendar*/
+
+.calendar {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 10px;
+}
+.calendar-day {
+	border: 1px solid 1px solid rgba(0, 0, 0, 0.1);
+	padding: 10px;
+}
+
+.container {}
+.calendar-container {
+	background: #fff;
+	border-radius: 5px;
+
+	margin: 30px auto;
+}
+.calendar {
+	padding: 15px 30px;
+}
+.calendar-day {}
+
+.error-search{
+	font-size: 18px;
+	font-weight: 600;
+	color: #42484E;
+
+	padding: 20px 30px;
+}
+
+.click-fa{
+	font-size: 14px;
+	text-decoration: none;
+	color: #42484E;
+	padding: 0 10px;
+}
+
+.calendar-month{
+	font-weight: 600;
+	font-size: 18px;
+	color: #42484E;
+}
+
+.calendar-day {
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  padding: 0px;
+}
+
+.calendar-entry {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.calendar-entry__time-room {
+  font-size: 14px;
+  color: #666;
+}
+
+.calendar-entry__name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 2px;
+}
+
+.calendar-entry__count {
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}
+
+.show-all-link {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.show-all-link:hover {
+  text-decoration: underline;
+}
+
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.calendar-nav-button {
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.calendar-nav-button .fa {
+  font-size: 18px;
+}
+
+.calendar-month {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.calendar-header-day{
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+	text-align: center;
+	color: #42484E;
+	font-weight: 600;
+	font-size: 17px;
+
+	padding: 10px;
+}
+
+.calendar-day-footer{
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+	text-align: center;
+}
+
+.calendar-entry__count{
+	text-align: center;
+}
+
+.go-fa{
+	color: #42484E;
+	font-size: 15px;
+}
+
+.calendar-day-section .calendar-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.calendar-day-section .calendar-list__item {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+
+    width: 100%;
+}
+
+.calendar-day-section .calendar-list__item strong {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.calendar-day-section .calendar-list__item span {
+    color: #666;
+}
+
+.calendar-day-section .calendar-list__item:last-child {
+    border-bottom: none;
+}
+
+.calendar-day__link{
+	text-decoration: none;
+}
+
+.calendar-day__title{
+	color: #42484E;
+	font-size: 17px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.calendar-event-day{
+	padding: 20px;
+}
+
+
+@media (max-width: 1024px) {
+  /* Стили для ноутбуков */
+  .menu__link {
+    font-size: 14px;
+    padding: 15px 0;
+  }
+
+  .body-header__title {
+    font-size: 18px;
+  }
+
+  .body-header-container {
+    padding: 20px 0;
+  }
+
+  .home-info-block__title {
+    font-size: 18px;
+  }
+
+  .home-info-block__header-button {
+    font-size: 13px;
+    padding: 3px 7px;
+  }
+
+  .home-info-block__span {
+    font-size: 13px;
+  }
+
+  .home-info-block__main-list__item {
+    padding: 15px 10px;
+  }
+
+  .home-info-block__person, 
+  .home-info-block__vacicine, 
+  .home-info-block__main-list__span {
+    font-size: 13px;
+  }
+
+  .personal-header__title {
+    font-size: 17px;
+  }
+
+  .personal-header__button {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
+
+  .personal-main-header__item, 
+  .personal-info__item {
+    font-size: 13px;
+  }
+
+  .personal-button {
+    font-size: 13px;
+    padding: 3px 7px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Стили для планшетов */
+  body {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .body-header {
+    position: relative;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .home-info-block {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .personal-header, 
+  .personal-main-header, 
+  .personals-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .personal-header__title, 
+  .personal-main-header__item, 
+  .personal-info__item {
+    width: 100%;
+    text-align: left;
+    padding: 10px 0;
+  }
+
+  .personal-header__button, 
+  .personal-button {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .personal-header__search-box {
+    width: 100%;
+    text-align: center;
+  }
+
+  .menu__link, 
+  .body-header__title, 
+  .home-info-block__title, 
+  .home-info-block__header-button, 
+  .home-info-block__span, 
+  .home-info-block__main-list__item, 
+  .home-info-block__person, 
+  .home-info-block__vacicine, 
+  .personal-header__title, 
+  .personal-header__button, 
+  .personal-main-header__item, 
+  .personal-info__item, 
+  .personal-button {
+    font-size: 12px;
+    padding: 10px 0;
+  }
+}
+
+.calendar-list-event-day, .calendar-days, .calendar-event-day{
+	width: 100%;	
+}
+
+.calendar-list-event-day{
+	display: 	inline-block;
+	list-style-type: none;	
+}
+
+.calendar-days{
+	display: 	flex;
+	justify-content: 	start;
+	flex-wrap: wrap;
+}
+
+
+.calendar-day-section {
+  padding: 20px;
+}
+
+.calendar-room {
+	margin-top: 20px;	
+  margin-bottom: 20px;
+  margin-right: 20px;	
+}
+
+.calendar-room h4 {
+  font-size: 1.2rem;
+	padding: 5px 10px;	
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 0;
+  border-radius: 5px 5px 0px 0;
+  background: #f9f9f9;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-table th,
+.calendar-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.calendar-table th {
+  background-color: #f0f0f0;
+}
+
+.no-schedules-message {
+	font-weight: 600;	
+  color: #42484E;
+  margin: 5px 0;
+}
+
+
+/*Reports Page*/
+.reports {}
+.container {}
+.reports-container {
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+
+	margin: 30px auto;
+}
+.personal-header {}
+.block-header {}
+.block-header__title {}
+.personal-header__title {}
+.reports-menu {}
+.reports-menu__item {
+	list-style-type: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	padding: 15px 20px;
+
+	display: flex;
+	justify-content: space-between;
+}
+
+.reports-menu__item a{
+	text-decoration: none;
+	font-weight: 500;
+	color: #42484E;
+}
+
+.rep-fa{
+	font-size: 15px;
+	color: #007bff;
+
+	margin-right: 10px;
+}
+
+.report-header-ul{
+	display: inline-block;
+	text-align: left;
+	width: 100%;
+
+	font-size: 17px;
+}
+
+.reports-item-ul-f{
+	width: 33%;
+}
+.reports-item-ul{
+	flex-wrap: wrap;
+}
+
+.reports-item-ul-f-a{
+	padding: 5px 0;
+
+}
+
+.reports-item-ul-f-b{
+	width: 20%;
+	text-align: center;
+}
+
+.no-shedule-today{
+	font-weight: 600;
+	font-size: 17px;
+	color: #42484E;
+}
+
+.home-info-block__header-button{
+	margin-left: 10px;
+}
+
+
+.calendar-list-event td{
+	width: 11%;
+	text-align: center;
+	padding: 10px 0;
+
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.calendar-list-event span{
+	width: 15%;
+	text-align: center;
+}
+
+.form-edit-calendar{
+	width: 30%;
+	padding: 20px 30px;
+}
+
+.home-info-block__main-list li{
+	list-style-type: none;
+}
+
+.home-info-block__main-list a{
+	font-weight: 500;
+	text-decoration: none;
+	color: #42484E;
+}
+
+.status-fa{
+	font-size: 14px;
 }

@@ -1,0 +1,2 @@
+module AutoSchedulesHelper
+end

@@ -1,0 +1,43 @@
+<section class="body-header">
+  <div class="body-header-container">
+    <h2 class="body-header__title">Отчёты</h2>
+    <a href="#" class="body-header-user">
+      <span class="body-header-user__fio">Профиль</span>
+      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+    </a>
+  </div>
+</section>
+
+<section class="reports">
+  <div class="container reports-container">
+    <div class="personal-header block-header">
+      <h3 class="block-header__title personal-header__title">Готовые отчёты</h3>
+    </div>
+    <ul class="personal-main-header">
+        <li class="personal-main-header__item">
+          <span class="personal-main-header__span personal-main-header__fio report-header-ul">Отчёт</span>
+        </li>
+        <li class="personal-main-header__item" style="text-align: right;">
+          <span class="personal-main-header__span personal-main-header__fio">Описание</span>
+        </li>
+      </ul>
+    <ul class="reports-menu">
+      <li class="reports-menu__item">
+        <span class="link-reports">
+          <i class="fa-regular fa-folder rep-fa"></i><%= link_to 'Кол-во вакцин на заказ', reports_generate_vaccine_order_report_path %>
+        </span>
+        <div class="reports-desc">
+          Количество вакцин необходимое для заказа в этом месяце
+        </div>
+      </li>
+      <li class="reports-menu__item">
+        <span class="link-reports">
+          <i class="fa-regular fa-folder rep-fa"></i><%= link_to 'Записи на вакцинацию сотрудников по отделам', reports_generate_employee_vaccine_report_path %>
+        </span>
+        <div class="reports-desc">
+          Расписание записей для вакцинаций сотрудников по отделам
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,89 @@
+<section class="body-header">
+  <div class="body-header-container">
+    <h2 class="body-header__title">Календарь</h2>
+    <a href="#" class="body-header-user">
+      <span class="body-header-user__fio">Профиль</span>
+      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+    </a>
+  </div>
+</section>
+
+<section class="calendar-section">
+  <div class="container calendar-container">
+    <div class="personal-header calendar-header block-header">
+      <h3 class="personal-header__title">Календарь записей</h3>
+      <div class="calendar-navigation">
+        <%= link_to calendar_vaccination_schedules_path(month: @current_month.prev_month.beginning_of_month), class: 'calendar-nav-button' do %>
+          <i class="fa-solid fa-angles-left click-fa"></i>
+        <% end %>
+        <span class="calendar-month"><%= @current_month.strftime('%B %Y') %></span>
+        <%= link_to calendar_vaccination_schedules_path(month: @current_month.next_month.beginning_of_month), class: 'calendar-nav-button' do %>
+          <i class="fa-solid fa-angles-right click-fa"></i>
+        <% end %>
+      </div>
+      <%= link_to "Добавить запись", new_vaccination_schedule_path, class: 'personal-header__button' %>
+    </div>
+    <div class="calendar">
+      <% (@current_month..@current_month.end_of_month).each do |date| %>
+        <div class="calendar-day">
+          <h3 class="calendar-header-day">
+            <%= link_to show_day_vaccination_schedules_path(date: date), class: 'calendar-day__link' do %>
+            <span class="calendar-day__title"><%= date.strftime('%d %B') %></span> 
+            <i class="fa-solid fa-caret-right go-fa"></i>
+          <% end %>
+          </h3>
+          <div class="calendar-event-day">
+            <% if @schedules[date] %>
+              <ul>
+                <% @schedules[date].first(3).each do |schedule| %>
+                  <li class="calendar-entry">
+                    <strong class="calendar-entry__name"><%= schedule.personal.fio %></strong>
+                    <span class="calendar-entry__time-room">
+                      <%= schedule.vaccination_time.strftime('%H:%M') %> в кабинете <%= schedule.room.name %>
+                    </span>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p>Нет записей</p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container calendar-container calendar-list-event">
+    <div class="personal-header calendar-header block-header">
+      <h3 class="personal-header__title">Расписание всех вакцинаций</h3>
+    </div>
+
+    <table>
+      <div class="home-info-block__main-header">
+          <span class="home-info-block__span">Дата</span>
+          <span class="home-info-block__span">Время</span>
+          <span class="home-info-block__span">Врач</span>
+          <span class="home-info-block__span">Кабинет</span>
+          <span class="home-info-block__span">Тип вакцины</span>
+          <span class="home-info-block__span">Сотрудник</span>
+          <span class="home-info-block__span">Действия</span>
+        </div>
+      <tbody>
+        <% @vaccination_schedules.each do |schedule| %>
+          <tr>
+            <td><%= schedule.vaccination_date.strftime('%d.%m.%Y') %></td>
+            <td><%= schedule.vaccination_time.strftime('%H:%M') %></td>
+            <td><%= schedule.room.doctor %></td>
+            <td><%= schedule.room.name %></td>
+            <td><%= schedule.vaccine.name %></td>
+            <td><%= schedule.personal.fio %></td>
+            <td>
+              <%= link_to 'Редактировать', edit_vaccination_schedule_path(schedule) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>  
+</section>

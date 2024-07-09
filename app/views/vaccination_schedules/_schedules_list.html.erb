@@ -1,0 +1,15 @@
+
+<% if schedules.any? %>
+<% schedules.each do |schedule| %>
+<li class="home-info-block__main-list__item">
+    <span class="home-info-block__main-list__span list_span"><%= link_to schedule.personal.fio, personal_path(schedule.personal) %></span>
+    <span class="home-info-block__main-list__span list_span"><%= link_to schedule.vaccine.name, vaccine_path(schedule.vaccine) %></span>
+    <span class="home-info-block__main-list__span list_span"><%= schedule.room.name %></span>
+    <span class="home-info-block__main-list__span list_span"><%= schedule.vaccination_time.strftime("%H:%M") %></span>
+</li>
+<% end %>
+<% else %>
+<li class="home-info-block__main-list__item">
+    <span class="home-info-block__main-list__span list_span" colspan="4">На сегодня в этом кабинете нет записей</span>
+</li>
+<% end %>

@@ -1,0 +1,27 @@
+<h1>Создание расписания вакцинации</h1>
+
+<%= form_with model: @schedule, local: true do |form| %>
+  <div>
+    <%= form.label :personal_id, 'Сотрудник' %>
+    <%= form.collection_select :personal_id, @personals, :id, :fio %>
+  </div>
+  <div>
+    <%= form.label :vaccine_id, 'Вакцина' %>
+    <%= form.collection_select :vaccine_id, @vaccines, :id, :name %>
+  </div>
+  <div>
+    <%= form.label :room_id, 'Кабинет' %>
+    <%= form.collection_select :room_id, @rooms, :id, :name %>
+  </div>
+  <div>
+    <%= form.label :vaccination_date, 'Дата вакцинации' %>
+    <%= form.date_select :vaccination_date %>
+  </div>
+  <div>
+    <%= form.label :vaccination_time, 'Время вакцинации' %>
+    <%= form.time_select :vaccination_time %>
+  </div>
+  <div>
+    <%= form.submit 'Создать расписание' %>
+  </div>
+<% end %>

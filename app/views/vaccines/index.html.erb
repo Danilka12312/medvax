@@ -8,15 +8,84 @@
   </div>
 </section>
 
-<p style="color: green"><%= notice %></p>
-
-<div id="vaccines">
-  <% @vaccines.each do |vaccine| %>
-    <%= render vaccine %>
-    <p>
-      <%= link_to "Show this vaccine", vaccine %>
-    </p>
-  <% end %>
+<div class="container vaccine-container">
+  <div class="personal-header">
+    <h3 class="personal-header__title">Список вакцин</h3>
+    <div class="personal-header__search-box">
+      <a href="#" class="personal-header__search-link"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <input type="text" id="search" class="personal-header__search" placeholder="Поиск">
+    </div>
+    <%= link_to "Добавить вакцину", new_vaccine_path, class: 'personal-header__button' %>
+  </div>
+  <div id="vaccines">
+    <ul class="personal-main-header vaccines-main-header">
+      <li class="personal-main-header__item vaccines-main-header__item">
+        <span class="personal-main-header__span personal-main-header__fio">Название</span>
+      </li>
+      <li class="personal-main-header__item vaccines-main-header__item">
+        <span class="personal-main-header__span">Производитель</span>
+      </li>
+      <li class="personal-main-header__item vaccines-main-header__item">
+        <span class="personal-main-header__span">Условия хранения</span>
+      </li>
+      <li class="personal-main-header__item vaccines-main-header__item">
+        <span class="personal-main-header__span">Описание</span>
+      </li>
+      <li class="personal-main-header__item vaccines-main-header__item">
+        <span class="personal-main-header__span">Срок действия вакцины</span>
+      </li>
+      <li class="personal-main-header__item vaccines-main-header__item">
+      </li>
+    </ul>
+    <div id="vaccines-list">
+      <%= render partial: 'vaccines_list', locals: { vaccines: @vaccines } %>
+    </div>
+  </div>
 </div>
 
-<%= link_to "New vaccine", new_vaccine_path %>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const searchInput = document.getElementById("search");
+  const vaccineList = document.getElementById("vaccines-list");
+  let errorDisplayed = false; // Флаг для отслеживания вывода ошибки
+
+  // Функция для фильтрации списка вакцин
+  function filterVaccines(query) {
+    const vaccines = vaccineList.querySelectorAll('.vaccine-block-card');
+    let found = false; // Флаг для отслеживания наличия найденной вакцины
+
+    vaccines.forEach(vaccine => {
+      const name = vaccine.querySelector('.vaccine-info__item:nth-child(1)').textContent.toLowerCase();
+      if (name.includes(query.toLowerCase())) {
+        vaccine.style.display = "block"; // Показать элемент, если соответствует запросу
+        found = true;
+      } else {
+        vaccine.style.display = "none"; // Скрыть элемент, если не соответствует запросу
+      }
+    });
+
+    // Если вакцина не найдена и сообщение еще не показано, выводим сообщение об ошибке
+    if (!found && !errorDisplayed) {
+      const errorMessage = document.createElement('p');
+      errorMessage.className = 'error-search';
+      errorMessage.textContent = 'Вакцина с таким названием не найдена.';
+      vaccineList.appendChild(errorMessage); // Добавляем сообщение в конец списка вакцин
+      errorDisplayed = true; // Устанавливаем флаг, что сообщение было показано
+    } else if (found && errorDisplayed) {
+      // Если вакцина найдена, но сообщение об ошибке было показано, удаляем его
+      const errorMessage = vaccineList.querySelector('.error-search');
+      if (errorMessage) {
+        errorMessage.remove();
+        errorDisplayed = false;
+      }
+    }
+  }
+
+  // Обработчик изменения в поисковом поле
+  searchInput.addEventListener("input", function() {
+    const query = searchInput.value.trim();
+    filterVaccines(query);
+  });
+});
+</script>
+

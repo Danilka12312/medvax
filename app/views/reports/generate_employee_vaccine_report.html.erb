@@ -1,0 +1,61 @@
+<section class="body-header">
+  <div class="body-header-container">
+    <h2 class="body-header__title">Отчёты</h2>
+    <a href="#" class="body-header-user">
+      <span class="body-header-user__fio">Отчёты</span>
+      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+    </a>
+  </div>
+</section>
+
+<section class="reports">
+  <div class="container personal-show">
+  <div class="personal-header">
+    <h3 class="personal-header__title personal-show__head"><i class="fa-solid fa-chevron-left back-fa"></i> <%= link_to "Назад", "javascript:history.back()", class: 'personal-show__link' %>
+    <h3 class="personal-show__fio personal-header__title">Отчёт на <%= @current_month.strftime("%B %Y") %>:</h3>
+    <%= link_to "Скачать PDF", reports_generate_employee_vaccine_report_path(format: :pdf), class: 'personal-header__button' %>
+  </div>
+  <table>
+    <ul class="personal-main-header">
+      <li class="personal-main-header__item reports-item-ul-f">
+        <span class="personal-main-header__span">Сотрудник</span>
+      </li>
+
+      <li class="personal-main-header__item reports-item-ul-f">
+        <span class="personal-main-header__span">Вакцина</span>
+      </li>
+
+      <li class="personal-main-header__item reports-item-ul-f">
+        <span class="personal-main-header__span">Дата</span>
+      </li>
+
+      <li class="personal-main-header__item reports-item-ul-f">
+        <span class="personal-main-header__span">Время</span>
+      </li>
+
+      <li class="personal-main-header__item reports-item-ul-f">
+        <span class="personal-main-header__span">Кабинет</span>
+      </li>
+    </ul>
+    <ul class="personals-info reports-item-ul">
+      <% @schedules.each do |schedule| %>
+          <li class="personal-info__item reports-item-ul-f reports-item-ul-f-a reports-item-ul-f-b">
+            <p class="personal-info__p"><%= schedule.personal.fio %></p>
+          </li>
+          <li class="personal-info__item reports-item-ul-f reports-item-ul-f-a reports-item-ul-f-b">
+            <p class="personal-info__p"><%= schedule.vaccine.name %></p>
+          </li>
+          <li class="personal-info__item reports-item-ul-f reports-item-ul-f-a reports-item-ul-f-b">
+            <p class="personal-info__p"><%= schedule.vaccination_date %></p>
+          </li>
+          <li class="personal-info__item reports-item-ul-f reports-item-ul-f-a reports-item-ul-f-b">
+            <p class="personal-info__p"><%= schedule.vaccination_time.strftime("%H:%M") %></p>
+          </li>
+          <li class="personal-info__item reports-item-ul-f reports-item-ul-f-a reports-item-ul-f-b">
+            <p class="personal-info__p"><%= schedule.room.name %></p>
+          </li>
+      <% end %>
+    </ul>
+  </table>
+  </div>
+</section>

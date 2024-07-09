@@ -25,8 +25,8 @@
             <a href="<%= root_path %>" class="menu__link"><i class="fa-solid fa-house menu-fa"></i> Главная</a>
           </li>
 
-          <li class="menu__item">
-            <a href="#" class="menu__link"><i class="fa-regular fa-calendar menu-fa"></i> Календарь</a>
+          <li class="menu__item <%= 'menu__item_active' if request.fullpath.include?(vaccination_schedules_path) %>">
+            <a href="<%= calendar_vaccination_schedules_path %>" class="menu__link "><i class="fa-regular fa-calendar menu-fa"></i> Календарь</a>
           </li>
 
           <li class="menu__item <%= 'menu__item_active' if request.fullpath.include?(vaccines_path) %>">
@@ -37,8 +37,8 @@
             <a href="<%= personals_path %>" class="menu__link"><i class="fa-solid fa-people-roof menu-fa"></i> Сотрудники</a>
           </li>
 
-          <li class="menu__item">
-            <a href="#" class="menu__link"><i class="fa-solid fa-file-export menu-fa"></i> Отчёты</a>
+          <li class="menu__item <%= 'menu__item_active' if request.fullpath.include?(reports_path) %>">
+            <a href="<%= reports_index_path %>" class="menu__link"><i class="fa-solid fa-file-export menu-fa"></i> Отчёты</a>
           </li>
         </ul>
       </div>

@@ -8,4 +8,12 @@ class Personal < ApplicationRecord
 
   	has_many :vaccinations
   	has_many :vaccines, through: :vaccinations
+
+  	def expiring_vaccinations(start_date, end_date)
+    vaccinations.joins(:vaccine).where("vaccination_date + vaccines.expiry_date * 1 BETWEEN ? AND ?", start_date, end_date)
+  end
+
+  def missing_mandatory_vaccinations
+    Vaccine.where(mandatory: true).where.not(id: vaccinations.pluck(:vaccine_id))
+  end
 end

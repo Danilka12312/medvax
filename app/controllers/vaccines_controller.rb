@@ -1,5 +1,6 @@
 class VaccinesController < ApplicationController
   before_action :set_vaccine, only: %i[ show edit update destroy ]
+  before_action :set_vaccine, only: [:show, :edit, :update, :destroy]
 
   # GET /vaccines or /vaccines.json
   def index
@@ -61,10 +62,13 @@ class VaccinesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_vaccine
       @vaccine = Vaccine.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "Вакцина с указанным идентификатором не найдена."
+      redirect_to vaccines_path
     end
 
     # Only allow a list of trusted parameters through.
     def vaccine_params
-      params.require(:vaccine).permit(:name, :manufacturer, :storage_conditions, :description, :expiry_date)
+      params.require(:vaccine).permit(:name, :manufacturer, :storage_conditions, :description, :expiry_date, :mandatory)
     end
 end

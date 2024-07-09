@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  personal: one
+  vaccine: one
+  room: one
+  vaccination_date: 2024-07-06
+  vaccination_time: 2024-07-06 03:59:08
+
+two:
+  personal: two
+  vaccine: two
+  room: two
+  vaccination_date: 2024-07-06
+  vaccination_time: 2024-07-06 03:59:08

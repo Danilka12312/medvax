@@ -10,6 +10,8 @@ module MedVax
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.time_zone = 'Moscow'  # Укажите здесь ваш часовой пояс
+    config.active_record.default_timezone = :local  # Если нужно, чтобы ActiveRecord также использовал локальное время
 
     # Configuration for the application, engines, and railties goes here.
     #

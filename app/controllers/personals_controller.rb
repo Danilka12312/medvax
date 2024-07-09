@@ -4,10 +4,13 @@ class PersonalsController < ApplicationController
   # GET /personals or /personals.json
   def index
     @personals = Personal.order(created_at: :desc).page(params[:page]).per(30) 
+    @button_status = 'info'
   end
 
   # GET /personals/1 or /personals/1.json
   def show
+    @button_status = 'edit'
+    @vaccinations = @personal.vaccinations.page(params[:page]).per(10)
   end
 
   # GET /personals/new

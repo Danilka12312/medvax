@@ -1,7 +1,9 @@
 <ul id="<%= dom_id personal %>" class="personals-info">
-  <li class="personal-info__item personal-info__fio">
-    <p class="personal-info__p"><%= personal.fio %></p>
-  </li>
+  <% if @button_status != "edit" %>
+    <li class="personal-info__item personal-info__fio">
+      <p class="personal-info__p"><%= personal.fio %></p>
+    </li>
+  <% end %>
   <li class="personal-info__item">
     <p class="personal-info__p"><%= personal.departament %></p>
   </li>
@@ -9,15 +11,19 @@
     <p class="personal-info__p"><%= personal.date_of_birthday %></p>
   </li>
   <li class="personal-info__item">
-    <p class="personal-info__p"><%= personal.gender %></p>
+    <p class="personal-info__p peronsla-info__gender"><%= personal.gender %></p>
   </li>
-  <li class="personal-info__item">
+  <li class="personal-info__item personal-info__email">
     <p class="personal-info__p"><%= personal.email %></p>
   </li>
   <li class="personal-info__item">
     <p class="personal-info__p"><%= personal.phone_number %></p>
   </li>
   <li class="personal-info__item">
-    <p class="personal-info__p"><%= link_to "Подробнее", personal, class: 'personal-button' %></p>
+    <% if @button_status == "info" %>
+      <p class="personal-info__p"><%= link_to "Подробнее", personal, class: 'personal-button' %></p>
+    <% else %>
+      <p class="personal-info__p"><%= link_to "Редактировать", edit_personal_path(@personal), class: 'personal-button' %></p>
+    <% end %>
   </li>
 </ul>

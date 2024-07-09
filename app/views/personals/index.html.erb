@@ -1,25 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
 <section class="body-header">
   <div class="body-header-container">
     <h2 class="body-header__title">Сотрудники</h2>
     <a href="#" class="body-header-user">
       <span class="body-header-user__fio">Профиль</span>
-      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+      <i class="fas fa-chevron-down body-header__fa"></i>
     </a>
   </div>
 </section>
 
 <section class="personal-section">
   <div class="container personal-container">
-    <div class="personal-header">
-      <h3 class="personal-header__title">Список всех сотрудников</h3>
+    <div class="personal-header block-header">
+      <h3 class="personal-header__title block-header__title">Список всех сотрудников</h3>
       <div class="personal-header__search-box">
         <a href="#" class="personal-header__search-link"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <input type="text" class="personal-header__search" placeholder="Поиск">
+        <input type="text" id="search" class="personal-header__search" placeholder="Поиск">
       </div>
       <%= link_to "Добавить сотрудника", new_personal_path, class: 'personal-header__button' %>
     </div>
+
     <div id="personals" class="personal-main">
       <ul class="personal-main-header">
         <li class="personal-main-header__item">
@@ -35,11 +34,11 @@
         </li>
 
         <li class="personal-main-header__item">
-          <span class="personal-main-header__span">Пол</span>
+          <span class="personal-main-header__span personal-main-header__gender">Пол</span>
         </li>
 
         <li class="personal-main-header__item">
-          <span class="personal-main-header__span">Почта</span>
+          <span class="personal-main-header__span personal-main-header__email">Почта</span>
         </li>
 
         <li class="personal-main-header__item">
@@ -62,3 +61,49 @@
     <% end %>
   </div>
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const searchInput = document.getElementById("search");
+  const personalsList = document.getElementById("personals");
+
+  // Создание элемента для сообщения об ошибке
+  const errorElement = document.createElement('p');
+  errorElement.textContent = 'Сотрудник с такими данными не найден.';
+  errorElement.classList.add('error-search'); // Добавление класса для стилизации
+  errorElement.style.display = 'none'; // Изначально скрываем элемент
+
+  // Добавляем созданный элемент в список сотрудников
+  personalsList.appendChild(errorElement);
+
+  // Функция для фильтрации списка сотрудников
+  function filterPersonals(query) {
+    const personals = personalsList.querySelectorAll('.personals-info-block');
+    let found = false; // Переменная для отслеживания наличия сотрудника с указанными данными
+
+    personals.forEach(personal => {
+      const name = personal.querySelector('.personal-info__fio .personal-info__p').textContent.toLowerCase();
+      if (name.includes(query.toLowerCase())) {
+        personal.style.display = "block"; // Показать элемент, если соответствует запросу
+        found = true; // Установить флаг, что сотрудник найден
+      } else {
+        personal.style.display = "none"; // Скрыть элемент, если не соответствует запросу
+      }
+    });
+
+    // Отображаем или скрываем сообщение об ошибке
+    if (!found) {
+      errorElement.style.display = 'block'; // Показать сообщение, если сотрудник не найден
+    } else {
+      errorElement.style.display = 'none'; // Скрыть сообщение, если сотрудники найдены
+    }
+  }
+
+  // Обработчик изменения в поисковом поле
+  searchInput.addEventListener("input", function() {
+    const query = searchInput.value.trim();
+    filterPersonals(query);
+  });
+});
+
+</script>

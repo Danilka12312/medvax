@@ -30,6 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  date:
+    formats:
+      month_and_year: "%B %Y"
   activerecord:
     models:
       personal: 'Сотрудник'

@@ -1,0 +1,15 @@
+<h1>Создание кабинета</h1>
+
+<%= form_with model: @room, local: true do |form| %>
+  <div>
+    <%= form.label :name, 'Название кабинета' %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :doctor, 'Врач' %>
+    <%= form.text_field :doctor %>
+  </div>
+  <div>
+    <%= form.submit 'Создать кабинет' %>
+  </div>
+<% end %>

@@ -1,8 +1,7 @@
-<%= form_with(model: vaccine) do |form| %>
+<%= form_with(model: vaccine, local: true, class: 'form-container') do |form| %>
   <% if vaccine.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(vaccine.errors.count, "error") %> prohibited this vaccine from being saved:</h2>
-
+    <div class="error-messages">
+      <h2><%= pluralize(vaccine.errors.count, "error") %> не позволяют сохранить вакцину:</h2>
       <ul>
         <% vaccine.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,38 +10,111 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, 'Название вакцины', class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-input' %>
   </div>
 
-  <div>
-    <%= form.label :manufacturer, style: "display: block" %>
-    <%= form.text_field :manufacturer %>
+  <div class="form-group">
+    <%= form.label :manufacturer, 'Производитель', class: 'form-label' %>
+    <%= form.text_field :manufacturer, class: 'form-input' %>
   </div>
 
-  <div>
-    <%= form.label :storage_conditions, style: "display: block" %>
-    <%= form.text_area :storage_conditions %>
+  <div class="form-group">
+    <%= form.label :storage_conditions, 'Условия хранения', class: 'form-label' %>
+    <%= form.text_area :storage_conditions, class: 'form-input' %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description, 'Описание', class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-input' %>
   </div>
 
-  <div>
-    <%= form.label :expiry_date, style: "display: block" %>
-    <%= form.number_field :expiry_date %>
+  <div class="form-group">
+    <%= form.label :expiry_date, 'Срок годности (в днях)', class: 'form-label' %>
+    <%= form.number_field :expiry_date, class: 'form-input' %>
   </div>
 
-  <div>
-    <%= form.label :mandatory, style: "display: block" %>
-    <%= form.check_box :mandatory %>
-    <%= form.label :mandatory, "Обязательная вакцина" %>
+  <div class="form-group form-check">
+    <%= form.check_box :mandatory, class: 'form-check-input' %>
+    <%= form.label :mandatory, 'Обязательная вакцина', class: 'form-check-label' %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit 'Сохранить', class: 'form-submit' %>
   </div>
 <% end %>
+
+<style>
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .form-check {
+    display: flex;
+    align-items: center;
+  }
+
+  .form-check-input {
+    margin-right: 10px;
+  }
+
+  .form-actions {
+    text-align: center;
+  }
+
+  .form-submit {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .form-submit:hover {
+    background-color: #0056b3;
+  }
+
+  .error-messages {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+  }
+
+  .error-messages h2 {
+    margin-top: 0;
+  }
+
+  .error-messages ul {
+    padding-left: 20px;
+  }
+</style>

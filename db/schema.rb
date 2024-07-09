@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_03_211951) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_06_005921) do
   create_table "personals", force: :cascade do |t|
     t.string "fio"
     t.string "date_of_birthday"
@@ -20,6 +20,26 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_03_211951) do
     t.string "departament"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.string "doctor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vaccination_schedules", force: :cascade do |t|
+    t.integer "personal_id", null: false
+    t.integer "vaccine_id", null: false
+    t.integer "room_id", null: false
+    t.date "vaccination_date"
+    t.time "vaccination_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["personal_id"], name: "index_vaccination_schedules_on_personal_id"
+    t.index ["room_id"], name: "index_vaccination_schedules_on_room_id"
+    t.index ["vaccine_id"], name: "index_vaccination_schedules_on_vaccine_id"
   end
 
   create_table "vaccinations", force: :cascade do |t|
@@ -44,6 +64,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_03_211951) do
     t.string "vaccine_type"
   end
 
+  add_foreign_key "vaccination_schedules", "personals"
+  add_foreign_key "vaccination_schedules", "rooms"
+  add_foreign_key "vaccination_schedules", "vaccines"
   add_foreign_key "vaccinations", "personals"
   add_foreign_key "vaccinations", "vaccines"
 end

@@ -1,0 +1,49 @@
+<section class="body-header">
+  <div class="body-header-container">
+    <h2 class="body-header__title">Отчёты</h2>
+    <a href="#" class="body-header-user">
+      <span class="body-header-user__fio">Профиль</span>
+      <i class="fa-solid fa-chevron-down body-header__fa"></i>
+    </a>
+  </div>
+</section>
+
+
+<section class="reports">
+  <div class="container personal-show">
+  <div class="personal-header">
+    <h3 class="personal-header__title personal-show__head"><i class="fa-solid fa-chevron-left back-fa"></i> <%= link_to "Назад", "javascript:history.back()", class: 'personal-show__link' %>
+    <h3 class="personal-show__fio personal-header__title">Отчёт на <%= @current_month.strftime("%B %Y") %>:</h3>
+    <%= link_to "Скачать PDF", reports_generate_vaccine_order_report_path(format: :pdf), class: 'personal-header__button' %>
+  </div>
+  <table>
+    <ul class="personal-main-header">
+      <li class="personal-main-header__item reports-item-ul-f">
+        <span class="personal-main-header__span">Вакцина</span>
+      </li>
+
+      <li class="personal-main-header__item reports-item-ul-f">
+        <span class="personal-main-header__span">Производитель</span>
+      </li>
+
+      <li class="personal-main-header__item reports-item-ul-f">
+        <span class="personal-main-header__span">Количество</span>
+      </li>
+    </ul>
+    <ul class="personals-info reports-item-ul">
+      <% @vaccine_counts.each do |vaccine_name, count| %>
+        <% vaccine = Vaccine.find_by(name: vaccine_name) %>
+          <li class="personal-info__item reports-item-ul-f reports-item-ul-f-a">
+            <p class="personal-info__p"><%= vaccine_name %></p>
+          </li>
+          <li class="personal-info__item reports-item-ul-f reports-item-ul-f-a">
+            <p class="personal-info__p"><%= vaccine.manufacturer %></p>
+          </li>
+          <li class="personal-info__item reports-item-ul-f reports-item-ul-f-a">
+            <p class="personal-info__p"><%= count %></p>
+          </li>
+      <% end %>
+    </ul>
+  </table>
+  </div>
+</section>
