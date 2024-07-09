@@ -80,9 +80,9 @@ end
     employees = Personal.includes(:vaccinations).all
 
     employees.each do |employee|
-      Vaccine.all.each do |vaccine|
-        vaccination = employee.vaccinations.find_by(vaccine: vaccine)
-        if vaccination.nil? || (vaccination.vaccination_date + vaccine.expiry_date.days).to_date <= month.end_of_month
+      employee.vaccinations.each do |vaccination|
+        vaccine = vaccination.vaccine
+        if vaccination.vaccination_date + vaccine.expiry_date.days <= month.end_of_month
           vaccine_counts[vaccine.name] += 1
         end
       end
@@ -90,4 +90,5 @@ end
 
     vaccine_counts
   end
+
 end
