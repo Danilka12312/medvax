@@ -77,18 +77,14 @@ end
 
   def calculate_vaccine_counts(month)
     vaccine_counts = Hash.new(0)
-    employees = Personal.includes(:vaccinations).all
+    scheduled_vaccinations = VaccinationSchedule.where(vaccination_date: month.beginning_of_month..month.end_of_month)
 
-    employees.each do |employee|
-      employee.vaccinations.each do |vaccination|
-        vaccine = vaccination.vaccine
-        if vaccination.vaccination_date + vaccine.expiry_date.days <= month.end_of_month
-          vaccine_counts[vaccine.name] += 1
-        end
-      end
+    scheduled_vaccinations.each do |schedule|
+      vaccine_counts[schedule.vaccine.name] += 1
     end
 
     vaccine_counts
   end
+
 
 end
