@@ -23,7 +23,7 @@ class PagesController < ApplicationController
     end_date = date.end_of_month
 
     Vaccination.joins(:vaccine)
-               .where("vaccinations.vaccination_date + INTERVAL vaccines.expiry_date || ' days' BETWEEN ? AND ?", start_date, end_date)
+               .where("vaccinations.vaccination_date + INTERVAL '1 day' * vaccines.expiry_date BETWEEN ? AND ?", start_date, end_date)
   end
 
   def missing_mandatory_vaccinations
