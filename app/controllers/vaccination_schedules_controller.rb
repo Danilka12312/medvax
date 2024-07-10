@@ -25,11 +25,37 @@ class VaccinationSchedulesController < ApplicationController
 
   def create
     @schedule = VaccinationSchedule.new(schedule_params)
-    if @schedule.save
+
+    if schedule_conflicts?(@schedule)
+      render :new, alert: 'Сотрудник уже записан на вакцинацию на этой неделе или имеет эту вакцину в последние 30 дней.'
+    elsif @schedule.save
       redirect_to vaccination_schedules_path, notice: 'Расписание успешно создано.'
     else
       render :new
     end
+  end
+
+  private
+
+  def schedule_conflicts?(schedule)
+    # Проверка на наличие записи на этой неделе
+    start_of_week = schedule.vaccination_date.beginning_of_week
+    end_of_week = schedule.vaccination_date.end_of_week
+
+    weekly_conflict = VaccinationSchedule.exists?(
+      personal_id: schedule.personal_id,
+      vaccination_date: start_of_week..end_of_week
+    )
+
+    # Проверка на наличие той же вакцины в последние 30 дней
+    start_date = schedule.vaccination_date - 30.days
+    vaccine_conflict = VaccinationSchedule.exists?(
+      personal_id: schedule.personal_id,
+      vaccine_id: schedule.vaccine_id,
+      vaccination_date: start_date..schedule.vaccination_date
+    )
+
+    weekly_conflict || vaccine_conflict
   end
 
   def show
