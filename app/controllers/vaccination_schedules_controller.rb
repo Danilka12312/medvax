@@ -25,37 +25,11 @@ class VaccinationSchedulesController < ApplicationController
 
   def create
     @schedule = VaccinationSchedule.new(schedule_params)
-
-    if schedule_conflicts?(@schedule)
-      render :new, alert: 'Сотрудник уже записан на вакцинацию на этой неделе или имеет эту вакцину в последние 30 дней.'
-    elsif @schedule.save
+    if @schedule.save
       redirect_to vaccination_schedules_path, notice: 'Расписание успешно создано.'
     else
       render :new
     end
-  end
-
-  private
-
-  def schedule_conflicts?(schedule)
-    # Проверка на наличие записи на этой неделе
-    start_of_week = schedule.vaccination_date.beginning_of_week
-    end_of_week = schedule.vaccination_date.end_of_week
-
-    weekly_conflict = VaccinationSchedule.exists?(
-      personal_id: schedule.personal_id,
-      vaccination_date: start_of_week..end_of_week
-    )
-
-    # Проверка на наличие той же вакцины в последние 30 дней
-    start_date = schedule.vaccination_date - 30.days
-    vaccine_conflict = VaccinationSchedule.exists?(
-      personal_id: schedule.personal_id,
-      vaccine_id: schedule.vaccine_id,
-      vaccination_date: start_date..schedule.vaccination_date
-    )
-
-    weekly_conflict || vaccine_conflict
   end
 
   def show
@@ -71,9 +45,6 @@ class VaccinationSchedulesController < ApplicationController
     @current_month = params[:month] ? Date.parse(params[:month]) : Date.today.beginning_of_month
     @vaccination_schedules = VaccinationSchedule.where('vaccination_date > ? OR (vaccination_date = ? AND vaccination_time >= ?)', Date.today, Date.today, Time.now).order(vaccination_date: :asc, vaccination_time: :asc)
     @schedules = VaccinationSchedule.where(vaccination_date: @current_month.beginning_of_month..@current_month.end_of_month).group_by { |schedule| schedule.vaccination_date }
-  rescue ArgumentError
-    @current_month = Date.today.beginning_of_month
-    redirect_to vaccination_schedules_calendar_path, alert: 'Неверный формат даты. Показан текущий месяц.'
   end
 
   def show_day
