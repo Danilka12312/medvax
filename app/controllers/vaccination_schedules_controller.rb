@@ -71,6 +71,9 @@ class VaccinationSchedulesController < ApplicationController
     @current_month = params[:month] ? Date.parse(params[:month]) : Date.today.beginning_of_month
     @vaccination_schedules = VaccinationSchedule.where('vaccination_date > ? OR (vaccination_date = ? AND vaccination_time >= ?)', Date.today, Date.today, Time.now).order(vaccination_date: :asc, vaccination_time: :asc)
     @schedules = VaccinationSchedule.where(vaccination_date: @current_month.beginning_of_month..@current_month.end_of_month).group_by { |schedule| schedule.vaccination_date }
+  rescue ArgumentError
+    @current_month = Date.today.beginning_of_month
+    redirect_to vaccination_schedules_calendar_path, alert: 'Неверный формат даты. Показан текущий месяц.'
   end
 
   def show_day
